@@ -39,7 +39,10 @@ router.post('/', (req, res) => {
     });
 });
 
-
+// update route
+// router.put('/:id', (req, res) => {
+//     res.redirect('/movies');
+// });
 
 // show route
 router.get('/:id', (req, res) => {
@@ -54,7 +57,17 @@ router.get('/:id', (req, res) => {
     });
 });
 
-
+// delete route
+router.delete('/:id', (req, res) => {
+    Movie.findByIdAndRemove(req.params.id, (err, deletedMovie) => {
+        if(err) {
+            res.send(err);
+        } else {
+            console.log(deletedMovie, 'This is deleted.');
+            res.redirect('/movies');
+        }
+    });
+});
 
 
 
