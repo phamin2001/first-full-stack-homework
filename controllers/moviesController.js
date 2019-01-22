@@ -40,9 +40,28 @@ router.post('/', (req, res) => {
 });
 
 // update route
-// router.put('/:id', (req, res) => {
-//     res.redirect('/movies');
-// });
+router.put('/:id', (req, res) => {
+   Movie.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedMOvie) => {
+        if(err) {
+            res.send(err);
+        } else {
+            console.log(updatedMOvie, 'This is updated');
+            res.redirect('/movies');
+        }
+   });
+});
+
+router.get('/:id/edit', (req, res) => {
+    Movie.findById(req.params.id, (err, foundMovie) => {
+        if(err) {
+            res.send(err);
+        } else {
+            res.render('edit.ejs', {
+                movie: foundMovie
+            });
+        }
+    });
+});
 
 // show route
 router.get('/:id', (req, res) => {
