@@ -51,6 +51,7 @@ router.put('/:id', (req, res) => {
    });
 });
 
+// edit route
 router.get('/:id/edit', (req, res) => {
     Movie.findById(req.params.id, (err, foundMovie) => {
         if(err) {
@@ -93,3 +94,4 @@ router.delete('/:id', (req, res) => {
 
 module.exports = router;
 
+ 
